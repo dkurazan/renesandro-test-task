@@ -20,8 +20,8 @@ export default function TableRow({
   const handleRemoveTask = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    dispatch(removeTask(id))
-  }
+    dispatch(removeTask(id));
+  };
 
   return (
     <form className={styles.tableRow}>
@@ -39,9 +39,9 @@ export default function TableRow({
       </div>
       <div>
         <ul className={styles.imageList}>
-        {images.map((image) => (
-          <li key={image.name}>{image.name}</li>
-        ))}
+          {images.map((image) => (
+            <li key={image.name}>{image.name}</li>
+          ))}
         </ul>
       </div>
       <div>
@@ -54,9 +54,11 @@ export default function TableRow({
         <span className={styles.filled}>{genType}</span>
       </div>
       <div>link</div>
-      <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <button className='purple-btn'>Generate</button>
-        <button className='red-btn' onClick={handleRemoveTask}>Remove</button>
+        <button className='red-btn' onClick={handleRemoveTask}>
+          Remove
+        </button>
       </div>
     </form>
   );

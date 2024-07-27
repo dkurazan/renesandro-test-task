@@ -8,9 +8,7 @@
   border: 2px solid #d4d4d4;
   border-radius: 10px;
   background-color: #f2f2f2;
-
 }
-
 
 /* LAYOUT */
 .tableHeader,
@@ -18,9 +16,7 @@
 .newTask {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-
 }
-
 
 /* HEADER */
 .tableHeader {
@@ -39,10 +35,9 @@
 }
 
 .tableHeader li:last-child,
-.tableRow>div:last-child {
+.tableRow > div:last-child {
   border: none;
 }
-
 
 /* BODY */
 .tableBody {
@@ -52,18 +47,18 @@
   border-radius: 0 0 12px 12px;
 }
 
-
 /* ROW */
 .tableRow {
   border-bottom: 2px solid #d4d4d4;
 }
 
-.tableRow>div {
-  height: calc( 100% - 20px);
+.tableRow > div {
+  height: calc(100% - 20px);
   padding: 10px;
 }
 
-.tableRow>div, .newTask>div {
+.tableRow > div,
+.newTask > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +104,6 @@
   font-weight: 800;
 }
 
-
 /* NEW TASK */
 .newTask {
   border-bottom: 2px solid #d4d4d4;
@@ -117,11 +111,11 @@
   background-color: #c0c0c0;
 }
 
-.newTask>div {
+.newTask > div {
   height: 100%;
 }
 
-.newTask>div:last-child {
+.newTask > div:last-child {
   border: none;
   padding: 0;
 }

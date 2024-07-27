@@ -39,7 +39,7 @@ const initialState: SelectedData = {
 export default function NewTask() {
   const [selectData, setSelectData] = useState<SelectedData>(initialState);
   const dispatch = useDispatch();
-  const imagesRef = useRef<{clearImages: () => void}>(null);
+  const imagesRef = useRef<{ clearImages: () => void }>(null);
 
   const handleGetSelectedValues = (
     value: string | EncryptedImagesType,
@@ -66,7 +66,7 @@ export default function NewTask() {
       selectData.images
     ) {
       const task: Task = {
-        id: `${selectData.name}--${Math.random()*1000}`,
+        id: `${selectData.name}--${Math.random() * 1000}`,
         name: selectData.name,
         dimension: selectData.dimension,
         templateId: selectData.templateId,
@@ -75,7 +75,7 @@ export default function NewTask() {
         genType: selectData.genType,
         images: selectData.images,
       };
-      
+
       dispatch(addTask(task));
       setSelectData(initialState);
       imagesRef.current?.clearImages();

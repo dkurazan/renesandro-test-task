@@ -1,4 +1,3 @@
-
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import styles from './Table.module.css';
