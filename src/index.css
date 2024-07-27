@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal {
+    margin: 30px auto 0;
+    border: none;
+    border-radius: 12px;
+    padding: 30px 10px;
+    background-color: #a1a1a1;
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+button {
+  padding: 7px 2px;
+  max-width: 200px;
+  width: 80%;
+  border: none;
+  border-radius: 7px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+}
+
+button:hover {
+  opacity: .8;
+}
+
+.yellow-btn {
+  background-color: #cef5d1;
+  color: #000;
+}
+
+.purple-btn {
+  background-color: #6232ae;
+  color: #fff;
+}
+
+.grey-btn {
+  background-color: #333;
+  color: #fff;
+}
+
+.red-btn {
+  background-color: #ff0000;
+  color: #000000;
+}
+
+
+
+
+/* Custom select component */
+.custom-select {
+  position: relative;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.custom-select__trigger {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom-select__trigger .arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+}
+
+.custom-select__options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 10;
+}
+
+.custom-select__option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom-select__option:hover {
+  background: #f1f1f1;
+}
+
+.custom-select__option.selected {
+  background: #f1f1f1;
+  font-weight: bold;
+}

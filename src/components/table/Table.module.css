@@ -1,0 +1,170 @@
+.table {
+  max-width: 90vw;
+  margin: 30px auto;
+}
+
+.tableContainer {
+  padding: 30px;
+  border: 2px solid #d4d4d4;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+
+}
+
+
+/* LAYOUT */
+.tableHeader,
+.tableRow,
+.newTask {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+
+}
+
+
+/* HEADER */
+.tableHeader {
+  border-radius: 15px 15px 0 0;
+  background-color: #f7f7f7;
+  list-style: none;
+  border: 2px solid #d4d4d4;
+}
+
+.tableHeader li {
+  border-right: 1px solid #d4d4d4;
+  padding: 15px;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+}
+
+.tableHeader li:last-child,
+.tableRow>div:last-child {
+  border: none;
+}
+
+
+/* BODY */
+.tableBody {
+  background-color: #fff;
+  border: 2px solid #d4d4d4;
+  border-bottom: none;
+  border-radius: 0 0 12px 12px;
+}
+
+
+/* ROW */
+.tableRow {
+  border-bottom: 2px solid #d4d4d4;
+}
+
+.tableRow>div {
+  height: calc( 100% - 20px);
+  padding: 10px;
+}
+
+.tableRow>div, .newTask>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #d4d4d4;
+}
+
+.imageList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.imageList li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  padding: 2px 5px;
+  background-color: #e9eef9;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.tableRow .text {
+  overflow-wrap: anywhere;
+}
+
+.tableRow .filled {
+  padding: 5px 10px;
+  background-color: #fdedc4;
+  border-radius: 8px;
+}
+
+.tableRow .id {
+  font-weight: 700;
+  font-size: 18px;
+  color: #777777;
+}
+
+.tableRow .name {
+  font-weight: 800;
+}
+
+
+/* NEW TASK */
+.newTask {
+  border-bottom: 2px solid #d4d4d4;
+  border-radius: 0 0 12px 12px;
+  background-color: #c0c0c0;
+}
+
+.newTask>div {
+  height: 100%;
+}
+
+.newTask>div:last-child {
+  border: none;
+  padding: 0;
+}
+
+.newTask input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  text-align: center;
+  padding: 0 5px;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.newTask input:focus,
+.newTask textarea:focus {
+  outline: none;
+}
+
+.newTask textarea {
+  resize: none;
+  width: 100%;
+  border: none;
+  padding: 10px 5px 0 10px;
+  background-color: transparent;
+  font-size: 16px;
+  height: calc(100% - 10px);
+}
+
+.newTask textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+.newTask textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.newTask textarea::-webkit-scrollbar-thumb {
+  background: #888;
+  cursor: auto;
+  border-radius: 15px;
+}
+
+.newTask textarea::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
