@@ -1,51 +1,24 @@
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/useReduxHooks';
 import styles from '../Table.module.css';
-import TableSelect from './TableSelect';
-import ImagePicker from '../../UI/ImagePicker';
-import { type EncryptedImagesType } from '../../UI/ImagePicker';
+import TaskForm from './TaskForm';
 import { addTask } from '../../../store/slices/tasksSlice';
-
-// Type for collecting input data
-type SelectedData = {
-  name?: string;
-  dimension?: '1x1' | '9x16' | '16x9';
-  templateId?: 'mwpswxcudtwxb' | '0xdoscyowl50c';
-  text?: string;
-  ammount?: string;
-  genType?: 'cyclic' | 'random';
-  images?: { name: string; url: string }[];
-};
-
-// Type for validation of input data
-type Task = {
-  id: string;
-  name: string;
-  dimension: '1x1' | '9x16' | '16x9';
-  templateId: 'mwpswxcudtwxb' | '0xdoscyowl50c';
-  text: string;
-  ammount: string;
-  genType: 'cyclic' | 'random';
-  images: { name: string; url: string }[];
-};
-
-// Initial state of input data
-const initialState: SelectedData = {
-  name: '',
-  text: '',
-  ammount: '',
-};
+import { addBtnObject } from '../../../store/slices/generateBtnSlice';
+import {
+  type SelectedData,
+  initialState,
+  validateData,
+} from './NewTaskHelpers';
 
 export default function NewTask() {
-  const [selectData, setSelectData] = useState<SelectedData>(initialState);
-  const dispatch = useDispatch();
-  const imagesRef = useRef<{ clearImages: () => void }>(null);
+  const [inputData, setInputData] = useState<SelectedData>(initialState);
+  const imagesRef = useRef<{ resetList: () => void }>(null);
+  const textRef = useRef<{ resetList: () => void }>(null);
+  const dispatch = useAppDispatch();
 
-  const handleGetSelectedValues = (
-    value: string | EncryptedImagesType,
-    id: string,
-  ) => {
-    setSelectData((prevValue) => {
+  // Collecting input
+  const handleGetSelectedValues = (value: string | string[], id: string) => {
+    setInputData((prevValue) => {
       return {
         ...prevValue,
         [id]: value,
@@ -55,105 +28,30 @@ export default function NewTask() {
 
   const handleAddTask = () => {
     // Validation and data transfer to the store
-    if (
-      selectData &&
-      selectData.name &&
-      selectData.dimension &&
-      selectData.templateId &&
-      selectData.text &&
-      selectData.ammount &&
-      selectData.genType &&
-      selectData.images
-    ) {
-      const task: Task = {
-        id: `${selectData.name}--${Math.random() * 1000}`,
-        name: selectData.name,
-        dimension: selectData.dimension,
-        templateId: selectData.templateId,
-        text: selectData.text,
-        ammount: selectData.ammount,
-        genType: selectData.genType,
-        images: selectData.images,
-      };
+    const validationResult = validateData(inputData);
 
-      dispatch(addTask(task));
-      setSelectData(initialState);
-      imagesRef.current?.clearImages();
+    if (validationResult) {
+      // creating task state and generate button state
+      dispatch(addTask(validationResult));
+      dispatch(addBtnObject(validationResult.id));
+
+      // Input fields reseting
+      setInputData(initialState);
+      imagesRef.current?.resetList();
+      textRef.current?.resetList();
     } else {
       alert('Please fill in all the required fields');
     }
   };
 
-  console.log(selectData);
-
   return (
     <div className={styles.newTask}>
-      <div>-----</div>
-      <div>
-        <input
-          type='text'
-          placeholder='Name'
-          value={selectData?.name}
-          onChange={(event) =>
-            handleGetSelectedValues(event.currentTarget.value, 'name')
-          }
-        />
-      </div>
-      <div>
-        <TableSelect
-          options={['1x1', '9x16', '16x9']}
-          value=''
-          passSelectedValue={(value) =>
-            handleGetSelectedValues(value, 'dimension')
-          }
-        />
-      </div>
-      <div>
-        <TableSelect
-          options={['mwpswxcudtwxb', '0xdoscyowl50c']}
-          value=''
-          passSelectedValue={(value) =>
-            handleGetSelectedValues(value, 'templateId')
-          }
-        />
-      </div>
-      <div>
-        <ImagePicker
-          ref={imagesRef}
-          passImages={(images) => handleGetSelectedValues(images, 'images')}
-        />
-      </div>
-      <div>
-        <textarea
-          rows={5}
-          placeholder='Text'
-          value={selectData?.text}
-          onChange={(event) =>
-            handleGetSelectedValues(event.currentTarget.value, 'text')
-          }
-        />
-      </div>
-      <div>
-        <input
-          type='number'
-          placeholder='Ammount'
-          value={selectData?.ammount}
-          min={1}
-          onChange={(event) =>
-            handleGetSelectedValues(event.currentTarget.value, 'ammount')
-          }
-        />
-      </div>
-      <div>
-        <TableSelect
-          value=''
-          options={['cyclic', 'random']}
-          passSelectedValue={(value) =>
-            handleGetSelectedValues(value, 'genType')
-          }
-        />
-      </div>
-      <div>-----</div>
+      <TaskForm
+        inputData={inputData}
+        onAddInputData={handleGetSelectedValues}
+        imagesRef={imagesRef}
+        textRef={textRef}
+      />
       <div>
         <button className='grey-btn' onClick={handleAddTask}>
           Add new task

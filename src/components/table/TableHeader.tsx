@@ -1,22 +1,10 @@
 import styles from './Table.module.css';
-
-const TITLES = [
-  'ID',
-  'Task name',
-  'Dimension',
-  'Template ID',
-  'Images',
-  'Text',
-  'Ammount',
-  'Gen Type',
-  'Result Ads',
-  'Actions',
-];
+import { TABLE_HEADINGS } from '../../util/STATIC_DATA';
 
 export default function TableHeader() {
   return (
     <ul className={styles.tableHeader}>
-      {TITLES.map((title) => (
+      {TABLE_HEADINGS.map((title) => (
         <li key={title}>{title}</li>
       ))}
     </ul>

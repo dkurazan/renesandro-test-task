@@ -1,67 +1,80 @@
-import { useState, ChangeEvent, forwardRef, useImperativeHandle } from 'react';
+import {
+  useState,
+  ChangeEvent,
+  useRef,
+} from 'react';
 import styles from './ImagePicker.module.css';
 import { filesToDataURL } from '../../util/helpers';
 
-type StateType = File[];
-
-export type EncryptedImagesType = { name: string; url: string }[];
+type StateType = string;
 
 type ImagePickerProps = {
-  passImages: (images: EncryptedImagesType) => void;
+  passImages: (image: string) => void;
+  value: string;
 };
 
-const ImagePicker = forwardRef<{ clearImages: () => void }, ImagePickerProps>(
-  function ImagePicker({ passImages }, ref) {
-    const [selectedFiles, setSelectedFiles] = useState<StateType>([]);
+export default function ImagePicker({ passImages, value }: ImagePickerProps) {
+  const [selectedFile, setSelectedFile] = useState<StateType>(value);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    useImperativeHandle(ref, () => ({
-      clearImages: () => setSelectedFiles([]),
-    }));
+  const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const image = event.target.files[0];
 
-    const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
-      if (event.target.files) {
-        const files = Array.from(event.target.files);
-        setSelectedFiles((prevFiles) => {
-          return [...prevFiles, ...files];
-        });
+      const encryptedImage = await filesToDataURL(image);
 
-        const encryptedImages = await filesToDataURL([
-          ...selectedFiles,
-          ...files,
-        ]);
+      setSelectedFile(encryptedImage);
+      passImages(encryptedImage);
+      event.target.value = '';
+    }
+  };
 
-        passImages(encryptedImages);
-      }
-    };
+  const handleRemoveImage = () => {
+    setSelectedFile('');
+    passImages('');
 
-    return (
-      <div className={styles.imagePicker}>
-        <input
-          id='fileInput'
-          type='file'
-          multiple
-          accept='image/*'
-          style={{ display: 'none' }}
-          onChange={handleFileSelect}
-        />
-        <div>
-          <ul className={styles.imageList}>
-            {selectedFiles.map((file, index) => (
-              <li className={styles.imageListItem} key={index}>
-                {file.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button
+  };
+
+  return (
+    <div className={styles.imagePicker}>
+      <input
+        id='fileInput'
+        type='file'
+        accept='image/*'
+        style={{ display: 'none' }}
+        onChange={handleFileSelect}
+        ref={inputRef}
+      />
+      <div className={styles.imageContainer}>
+        {selectedFile && (
+          <>
+            <img
+              className={styles.image}
+              src={selectedFile}
+              alt='image ref'
+              width='200'
+              height='200'
+            />
+            <div className={styles.removeBtn} onClick={handleRemoveImage}>
+              +
+            </div>
+          </>
+        )}
+        {!selectedFile && (
+          <div
+            className={styles.imagePlaceholder}
+            onClick={() => inputRef.current?.click()}
+          >
+            +
+          </div>
+        )}
+      </div>
+      {/* <button
           className={styles.button}
           onClick={() => document.getElementById('fileInput')?.click()}
         >
           Select images
-        </button>
-      </div>
-    );
-  },
-);
-
-export default ImagePicker;
+        </button> */}
+    </div>
+  );
+}

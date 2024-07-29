@@ -1,12 +1,19 @@
 import styles from './Table.module.css';
-import { type Task } from '../../store/slices/tasksSlice';
-import { useDispatch } from 'react-redux';
+import TaskCard from '../cards/TaskCard';
+import TableCell from './TableCell';
+import LayerList from './LayerList';
+import GenerateButton from './GenerateBtn';
+import RemoveButton from './RemoveBtn';
+import { useAppDispatch } from '../../hooks/useReduxHooks';
 import { removeTask } from '../../store/slices/tasksSlice';
-import { FormEvent } from 'react';
+import { resetImagesData } from '../../store/slices/imagesSlice';
+import { removeBtnObject } from '../../store/slices/generateBtnSlice';
+import { FormEvent, useState } from 'react';
+import { type Task } from '../../util/GLOBAL_TYPES';
 
 export default function TableRow({
-  id,
   index,
+  id,
   name,
   dimension,
   templateId,
@@ -15,51 +22,49 @@ export default function TableRow({
   genType,
   images,
 }: Task & { index: number }) {
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleRemoveTask = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    event.stopPropagation();
 
+    // Resetting task, imageLayers and button stores
     dispatch(removeTask(id));
+    dispatch(resetImagesData(id));
+    dispatch(removeBtnObject(id));
+  };
+
+  const handleOpenCard = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseCadr = () => {
+    setShowModal(false);
   };
 
   return (
-    <form className={styles.tableRow}>
-      <div>
-        <span className={styles.id}>{index}</span>
-      </div>
-      <div>
-        <span className={styles.name}>{name}</span>
-      </div>
-      <div>
-        <span className={styles.filled}>{dimension}</span>
-      </div>
-      <div>
-        <span className={styles.filled}>{templateId}</span>
-      </div>
-      <div>
-        <ul className={styles.imageList}>
-          {images.map((image) => (
-            <li key={image.name}>{image.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <p className={styles.text}>{text}</p>
-      </div>
-      <div>
-        <span>{ammount}</span>
-      </div>
-      <div>
-        <span className={styles.filled}>{genType}</span>
-      </div>
-      <div>link</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <button className='purple-btn'>Generate</button>
-        <button className='red-btn' onClick={handleRemoveTask}>
-          Remove
-        </button>
-      </div>
-    </form>
+    <>
+      <TaskCard
+        modalState={showModal}
+        onClose={handleCloseCadr}
+        taskInfo={{ id, name, images }}
+      />
+      <form className={styles.tableRow} onClick={handleOpenCard}>
+        <TableCell content={index + 1} className={styles.id} />
+        <TableCell content={name} className={styles.name} />
+        <TableCell content={dimension} className={styles.filled} />
+        <TableCell content={templateId} className={styles.filled} />
+        <LayerList items={images} className={styles.imageList} />
+        <LayerList items={text} className={styles.imageList} />
+        <TableCell content={ammount} />
+        <TableCell content={genType} className={styles.filled} />
+        <TableCell content="link" />
+        <div className={styles.buttons}>
+        <GenerateButton taskId={id} />
+        <RemoveButton onClick={handleRemoveTask} />
+        </div>
+      </form>
+    </>
   );
 }
