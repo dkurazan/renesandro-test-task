@@ -9,8 +9,8 @@ type StateType = {
 type Payload = {
   id: string;
   name: string;
-  dimension: string
-}
+  dimension: string;
+};
 
 const initialState: StateType = [];
 
@@ -28,10 +28,9 @@ export const tasksSlice = createSlice({
     },
     removeCreoGeneration: (state, action: PayloadAction<string>) => {
       return state.filter((item) => item.id !== action.payload);
-    }
+    },
   },
 });
 
-export const { saveCreoGeneration, removeCreoGeneration } =
-  tasksSlice.actions;
+export const { saveCreoGeneration, removeCreoGeneration } = tasksSlice.actions;
 export default tasksSlice.reducer;

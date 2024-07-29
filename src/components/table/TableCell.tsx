@@ -4,7 +4,11 @@ type TableCellProps = {
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-export default function TableCell({ content, className, onClick }: TableCellProps) {
+export default function TableCell({
+  content,
+  className,
+  onClick,
+}: TableCellProps) {
   return (
     <div onClick={onClick}>
       <span className={className}>{content}</span>

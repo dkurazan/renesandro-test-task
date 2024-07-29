@@ -63,6 +63,7 @@ export default function ImageLayer({ title, taskId }: ImageLayerProps) {
       <input
         className={styles.input}
         type='number'
+        min={1}
         placeholder='Generates per ref (!)'
         value={storedData?.gen_per_ref ? storedData.gen_per_ref : ''}
         onChange={(event) =>
