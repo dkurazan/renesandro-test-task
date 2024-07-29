@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/useReduxHooks';
-import { sendGenerationRequest } from '../cards/GenerateBtnHelpers';
+// import { sendGenerationRequest } from '../cards/GenerateBtnHelpers';
 
 export default function GenerateButton({ taskId }: { taskId: string }) {
   const allButtons = useAppSelector((state) => state.generateBtn);
@@ -25,7 +25,6 @@ export default function GenerateButton({ taskId }: { taskId: string }) {
       };
 
       console.log(dataForGeneration);
-      
 
       // try {
       //   const result = await sendGenerationRequest(dataForGeneration, 'tz-front/generate_formats');

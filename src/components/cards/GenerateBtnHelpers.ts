@@ -1,4 +1,4 @@
-import { type ImageLayer } from "../../store/slices/imagesSlice";
+import { type ImageLayer } from '../../store/slices/imagesSlice';
 
 type DataForImagesGeneration = {
   images: string[];
@@ -48,7 +48,10 @@ export const getDataForImagesGeneration = (
   });
 };
 
-export const sendGenerationRequest = async (data: DataForImagesGeneration | DataForCreoGeneration, endpoint: string) => {
+export const sendGenerationRequest = async (
+  data: DataForImagesGeneration | DataForCreoGeneration,
+  endpoint: string,
+) => {
   const response = await fetch(
     `https://fasteasy-jvqis72guq-lm.a.run.app/${endpoint}`,
     {

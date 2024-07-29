@@ -1,8 +1,4 @@
-import {
-  useState,
-  ChangeEvent,
-  useRef,
-} from 'react';
+import { useState, ChangeEvent, useRef } from 'react';
 import styles from './ImagePicker.module.css';
 import { filesToDataURL } from '../../util/helpers';
 
@@ -32,7 +28,6 @@ export default function ImagePicker({ passImages, value }: ImagePickerProps) {
   const handleRemoveImage = () => {
     setSelectedFile('');
     passImages('');
-
   };
 
   return (

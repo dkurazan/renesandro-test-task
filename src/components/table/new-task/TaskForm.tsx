@@ -8,9 +8,14 @@ type TaskFormProps = {
   onAddInputData: (value: string | string[], key: string) => void;
   imagesRef: React.Ref<{ resetList: () => void }>;
   textRef: React.Ref<{ resetList: () => void }>;
-}
+};
 
-export default function TaskForm({inputData, onAddInputData, textRef, imagesRef}: TaskFormProps) {
+export default function TaskForm({
+  inputData,
+  onAddInputData,
+  textRef,
+  imagesRef,
+}: TaskFormProps) {
   return (
     <>
       <div>-----</div>

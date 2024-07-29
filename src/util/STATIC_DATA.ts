@@ -11,26 +11,25 @@ export const TABLE_HEADINGS = [
   'Actions',
 ];
 
-
 export const INPUTFIELDS_DATA = {
   dimension: {
     name: 'Dimension',
-    options: ['1x1', '9x16', '16x9']
+    options: ['1x1', '9x16', '16x9'],
   },
   templateId: {
     name: 'templateId',
-    options: ['mwpswxcudtwxb', '0xdoscyowl50c']
+    options: ['mwpswxcudtwxb', '0xdoscyowl50c'],
   },
   genType: {
     name: 'genType',
-    options: ['cyclic', 'random']
+    options: ['cyclic', 'random'],
   },
   flow: {
     name: 'Flow',
-    options: ['other_models_mix', 'mj_model']
+    options: ['other_models_mix', 'mj_model'],
   },
   style: {
     name: 'Style',
-    options: ['An ultra-realistic photography', 'Anime style']
-  }
-}
+    options: ['An ultra-realistic photography', 'Anime style'],
+  },
+};

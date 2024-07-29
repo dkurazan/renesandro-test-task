@@ -148,7 +148,6 @@ button:disabled:hover {
   font-weight: bold;
 }
 
-
 /* CUSTOM ACCORDION */
 .accordion {
   /* border: 1px solid #ccc; */
@@ -160,7 +159,6 @@ button:disabled:hover {
 
 .accordion:first-child {
   border-top: 3px solid black;
-
 }
 
 .accordion-header {
@@ -192,4 +190,3 @@ button:disabled:hover {
     font-size: 12px !important;
   }
 }
-

@@ -15,11 +15,11 @@ export const tasksSlice = createSlice({
     addBtnObject: (state, action: PayloadAction<string>) => {
       state.push({
         id: action.payload,
-        isBtnDisabled: true
-      })
+        isBtnDisabled: true,
+      });
     },
     removeBtnObject: (state, action: PayloadAction<string>) => {
-      return state.filter(item => item.id !== action.payload)
+      return state.filter((item) => item.id !== action.payload);
     },
     enableButton: (state, action: PayloadAction<string>) => {
       state.map((item) =>
@@ -31,5 +31,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { addBtnObject, removeBtnObject, enableButton } = tasksSlice.actions;
+export const { addBtnObject, removeBtnObject, enableButton } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { enableButton } from '../../store/slices/generateBtnSlice';
 import { getDataForImagesGeneration } from './GenerateBtnHelpers';
-import { sendGenerationRequest } from './GenerateBtnHelpers';
+// import { sendGenerationRequest } from './GenerateBtnHelpers';
 
 type GenerateBtnProps = {
   children: ReactNode;

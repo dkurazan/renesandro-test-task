@@ -34,7 +34,7 @@
 }
 
 .tableHeader li:last-child,
-.tableRow>div:last-child {
+.tableRow > div:last-child {
   border: none;
 }
 
@@ -52,13 +52,13 @@
   cursor: pointer;
 }
 
-.tableRow>div {
+.tableRow > div {
   height: calc(100% - 20px);
   padding: 10px;
 }
 
-.tableRow>div,
-.newTask>div,
+.tableRow > div,
+.newTask > div,
 .tableHeader li {
   display: flex;
   align-items: center;
@@ -125,11 +125,11 @@
   background-color: #c0c0c0;
 }
 
-.newTask>div {
+.newTask > div {
   height: 100%;
 }
 
-.newTask>div:last-child {
+.newTask > div:last-child {
   border: none;
   padding: 0;
 }
@@ -176,21 +176,18 @@
   padding: 5px 0;
 }
 
-
-
 @media screen and (max-width: 1100px) {
   .table {
     max-width: fit-content;
-
   }
 
   .tableContainer {
     width: fit-content;
   }
 
-  .tableRow>div,
-.newTask>div,
-.tableHeader li {
-  min-width: 100px;
-}
+  .tableRow > div,
+  .newTask > div,
+  .tableHeader li {
+    min-width: 100px;
+  }
 }

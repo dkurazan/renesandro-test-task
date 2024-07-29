@@ -8,7 +8,12 @@ interface SelectProps {
   placeholder: string;
 }
 
-export default function CardSelect({options, value, onChange, placeholder}: SelectProps) {
+export default function CardSelect({
+  options,
+  value,
+  onChange,
+  placeholder,
+}: SelectProps) {
   return (
     <div className={styles.selectWrapper}>
       <Select

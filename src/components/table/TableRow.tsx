@@ -59,10 +59,10 @@ export default function TableRow({
         <LayerList items={text} className={styles.imageList} />
         <TableCell content={ammount} />
         <TableCell content={genType} className={styles.filled} />
-        <TableCell content="link" />
+        <TableCell content='link' />
         <div className={styles.buttons}>
-        <GenerateButton taskId={id} />
-        <RemoveButton onClick={handleRemoveTask} />
+          <GenerateButton taskId={id} />
+          <RemoveButton onClick={handleRemoveTask} />
         </div>
       </form>
     </>

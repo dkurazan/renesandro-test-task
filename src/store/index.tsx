@@ -15,7 +15,7 @@ const persistConfig = {
 const reducer = combineReducers({
   tasks: tasksReducer,
   images: imageReducer,
-  generateBtn: generateBtnReducer
+  generateBtn: generateBtnReducer,
 });
 
 const persisredReducer = persistReducer(persistConfig, reducer);

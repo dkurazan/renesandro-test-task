@@ -12,10 +12,10 @@ export const tasksSlice = createSlice({
       state.push(action.payload);
     },
     removeTask: (state, action: PayloadAction<string>) => {
-      const newState = state.filter(task => task.id !== action.payload);
+      const newState = state.filter((task) => task.id !== action.payload);
 
       return newState;
-    }
+    },
   },
 });
 

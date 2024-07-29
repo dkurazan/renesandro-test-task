@@ -13,7 +13,11 @@ type TaskCardProps = {
   };
 };
 
-export default function TaskCard({ modalState, onClose, taskInfo }: TaskCardProps) {
+export default function TaskCard({
+  modalState,
+  onClose,
+  taskInfo,
+}: TaskCardProps) {
   return (
     <Modal open={modalState} onClose={onClose}>
       <div className={styles.modalContainer}>

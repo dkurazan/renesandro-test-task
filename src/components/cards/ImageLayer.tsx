@@ -32,13 +32,17 @@ export default function ImageLayer({ title, taskId }: ImageLayerProps) {
         value={storedData?.dimension ? storedData.dimension : ''}
         placeholder={`${INPUTFIELDS_DATA.dimension.name} (!)`}
         options={INPUTFIELDS_DATA.dimension.options}
-        onChange={(val) => handleOnChange(INPUTFIELDS_DATA.dimension.name.toLowerCase(), val)}
+        onChange={(val) =>
+          handleOnChange(INPUTFIELDS_DATA.dimension.name.toLowerCase(), val)
+        }
       />
       <CardSelect
         value={storedData?.flow ? storedData.flow : ''}
         placeholder={`${INPUTFIELDS_DATA.flow.name} (!)`}
         options={INPUTFIELDS_DATA.flow.options}
-        onChange={(val) => handleOnChange(INPUTFIELDS_DATA.flow.name.toLowerCase(), val)}
+        onChange={(val) =>
+          handleOnChange(INPUTFIELDS_DATA.flow.name.toLowerCase(), val)
+        }
       />
       <div className='image-refs'>
         <h4>Image refs (!)</h4>
@@ -69,7 +73,9 @@ export default function ImageLayer({ title, taskId }: ImageLayerProps) {
         value={storedData?.style ? storedData.style : ''}
         placeholder={`${INPUTFIELDS_DATA.style.name} (!)`}
         options={['An ultra-realistic photography', 'Anime style']}
-        onChange={(val) => handleOnChange(INPUTFIELDS_DATA.style.name.toLowerCase(), val)}
+        onChange={(val) =>
+          handleOnChange(INPUTFIELDS_DATA.style.name.toLowerCase(), val)
+        }
       />
     </Accordion>
   );
