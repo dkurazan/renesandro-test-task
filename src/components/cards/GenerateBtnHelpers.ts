@@ -1,6 +1,6 @@
 import { type ImageLayer } from '../../store/slices/imagesSlice';
 
-type DataForImagesGeneration = {
+export type DataForImagesGeneration = {
   images: string[];
   dimension: string;
   style: string;
@@ -10,18 +10,18 @@ type DataForImagesGeneration = {
 };
 
 type DataForCreoGeneration = {
-  name: string;
+  task_name: string;
   dimension: '1x1' | '9x16' | '16x9';
-  templateId: 'mwpswxcudtwxb' | '0xdoscyowl50c';
-  ammount: string;
-  genType: 'cyclic' | 'random';
+  template_id: 'mwpswxcudtwxb' | '0xdoscyowl50c';
+  amount: string;
+  gen_type: 'cyclic' | 'random';
   image_layers: string[];
   text_layers: string[];
 };
 
 export const getDataForImagesGeneration = (
   layersData: ImageLayer[],
-): (DataForImagesGeneration | null)[] => {
+): (DataForImagesGeneration | undefined)[] => {
   return layersData.map((item) => {
     if (
       item &&
@@ -42,8 +42,8 @@ export const getDataForImagesGeneration = (
 
       return layerObject;
     } else {
-      alert(`Please fill in all the required fields for layer: ${item.id}`);
-      return null;
+      alert(`Please fill in all the required fields for the layer: ${item.id}`);
+      return;
     }
   });
 };
@@ -58,7 +58,7 @@ export const sendGenerationRequest = async (
       method: 'POST',
       headers: {
         accept: 'application/json',
-        Authorization: `Basic ${import.meta.env.VITE_API_KEY}`,
+        Authorization: `Basic ${import.meta.env.VITE_AUTH_TOKEN}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),

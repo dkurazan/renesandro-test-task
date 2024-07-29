@@ -32,6 +32,12 @@ const TableLayerInput = forwardRef<
     setInputData('');
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleAddLayer();
+    }
+  };
+
   return (
     <div className={styles.layer}>
       <ul className={styles.imageList}>
@@ -45,6 +51,7 @@ const TableLayerInput = forwardRef<
           placeholder={placeholder}
           value={inputData}
           onChange={(e) => setInputData(e.currentTarget.value)}
+          onKeyDown={handleKeyPress}
         />
         <button onClick={handleAddLayer}>+</button>
       </div>

@@ -1,8 +1,11 @@
 import { ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { enableButton } from '../../store/slices/generateBtnSlice';
-import { getDataForImagesGeneration } from './GenerateBtnHelpers';
-// import { sendGenerationRequest } from './GenerateBtnHelpers';
+import {
+  DataForImagesGeneration,
+  getDataForImagesGeneration,
+} from './GenerateBtnHelpers';
+import { sendGenerationRequest } from './GenerateBtnHelpers';
 
 type GenerateBtnProps = {
   children: ReactNode;
@@ -33,26 +36,26 @@ export default function GenerateBtn({ children, taskId }: GenerateBtnProps) {
       currenLayersArr.images,
     );
 
-    if (!dataForGeneration[0]) {
+    if (
+      dataForGeneration.includes(undefined) ||
+      dataForGeneration.length === 0
+    ) {
       return;
     }
 
-    if (!dataForGeneration || dataForGeneration.length === 0) {
-      alert('Please fill in all the required fields');
-      return;
+    try {
+      for (const layer of dataForGeneration) {
+        const result = await sendGenerationRequest(
+          layer as DataForImagesGeneration,
+          'tz-front/generate_images',
+        );
+        console.log(result);
+      }
+      dispatch(enableButton(taskId));
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      alert('An error occurred while generating images. Please try again.');
     }
-
-    console.log(dataForGeneration);
-    dispatch(enableButton(taskId));
-
-    // try {
-    //   const result = await sendGenerationRequest(dataForGeneration[0], 'tz-front/generate_images');
-    //   console.log(result);
-    //   dispatch(enableButton(taskId));
-    // } catch (error) {
-    //   console.error('There was a problem with the fetch operation:', error);
-    //   alert('An error occurred while generating images. Please try again.');
-    // }
   };
 
   return (
@@ -62,7 +65,7 @@ export default function GenerateBtn({ children, taskId }: GenerateBtnProps) {
           {children}
         </button>
       )}
-      {!btnState?.isBtnDisabled && <p style={{ color: 'green' }}>Generated</p>}
+      {!btnState?.isBtnDisabled && <p className='generated'>Generated</p>}
     </>
   );
 }

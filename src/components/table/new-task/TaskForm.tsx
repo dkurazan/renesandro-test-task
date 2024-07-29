@@ -31,7 +31,6 @@ export default function TaskForm({
       </div>
       <div>
         <TableSelect
-          key={1}
           options={INPUTFIELDS_DATA.dimension.options}
           value=''
           passSelectedValue={(value) =>
@@ -41,7 +40,6 @@ export default function TaskForm({
       </div>
       <div>
         <TableSelect
-          key={2}
           options={INPUTFIELDS_DATA.templateId.options}
           value=''
           passSelectedValue={(value) =>

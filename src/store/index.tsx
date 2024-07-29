@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import tasksReducer from './slices/tasksSlice';
 import imageReducer from './slices/imagesSlice';
 import generateBtnReducer from './slices/generateBtnSlice';
+import creoReducer from './slices/resultUrlSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit';
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   tasks: tasksReducer,
   images: imageReducer,
   generateBtn: generateBtnReducer,
+  creoGeneration: creoReducer,
 });
 
 const persisredReducer = persistReducer(persistConfig, reducer);

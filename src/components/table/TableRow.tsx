@@ -4,12 +4,10 @@ import TableCell from './TableCell';
 import LayerList from './LayerList';
 import GenerateButton from './GenerateBtn';
 import RemoveButton from './RemoveBtn';
-import { useAppDispatch } from '../../hooks/useReduxHooks';
-import { removeTask } from '../../store/slices/tasksSlice';
-import { resetImagesData } from '../../store/slices/imagesSlice';
-import { removeBtnObject } from '../../store/slices/generateBtnSlice';
-import { FormEvent, useState } from 'react';
+
+import { useState } from 'react';
 import { type Task } from '../../util/GLOBAL_TYPES';
+import ResultUrl from './ResultUrl';
 
 export default function TableRow({
   index,
@@ -23,23 +21,12 @@ export default function TableRow({
   images,
 }: Task & { index: number }) {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useAppDispatch();
-
-  const handleRemoveTask = (event: FormEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    // Resetting task, imageLayers and button stores
-    dispatch(removeTask(id));
-    dispatch(resetImagesData(id));
-    dispatch(removeBtnObject(id));
-  };
 
   const handleOpenCard = () => {
     setShowModal(true);
   };
 
-  const handleCloseCadr = () => {
+  const handleCloseCard = () => {
     setShowModal(false);
   };
 
@@ -47,7 +34,7 @@ export default function TableRow({
     <>
       <TaskCard
         modalState={showModal}
-        onClose={handleCloseCadr}
+        onClose={handleCloseCard}
         taskInfo={{ id, name, images }}
       />
       <form className={styles.tableRow} onClick={handleOpenCard}>
@@ -59,10 +46,10 @@ export default function TableRow({
         <LayerList items={text} className={styles.imageList} />
         <TableCell content={ammount} />
         <TableCell content={genType} className={styles.filled} />
-        <TableCell content='link' />
+        <ResultUrl taskId={id} />
         <div className={styles.buttons}>
-          <GenerateButton taskId={id} />
-          <RemoveButton onClick={handleRemoveTask} />
+          <GenerateButton taskId={id} name={name} dimension={dimension} />
+          <RemoveButton taskId={id} />
         </div>
       </form>
     </>

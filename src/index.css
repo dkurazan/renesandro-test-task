@@ -150,8 +150,6 @@ button:disabled:hover {
 
 /* CUSTOM ACCORDION */
 .accordion {
-  /* border: 1px solid #ccc; */
-  /* border-radius: 4px; */
   margin: 10px 0;
 
   border-bottom: 3px solid black;
@@ -183,6 +181,12 @@ button:disabled:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.generated {
+  font-weight: 500;
+  color: green;
+  cursor: default;
 }
 
 @media screen and (max-width: 1700px) {
